@@ -1,5 +1,4 @@
 using Geolocations.Persistence;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -23,9 +22,4 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.MapGet("/", ([FromServices] GeolocationsDbContext _context) =>
-{
-    return _context.Currencies.Find();
-});
-
-await app.RunAsync();
+app.Run();
