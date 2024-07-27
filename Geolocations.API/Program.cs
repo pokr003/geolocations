@@ -1,10 +1,8 @@
+using Carter;
 using Geolocations.Persistence;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
-
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<GeolocationsDbContext>(
     (options) => options
@@ -12,14 +10,12 @@ builder.Services.AddDbContext<GeolocationsDbContext>(
         .UseSnakeCaseNamingConvention()
 );
 
+builder.Services.AddCarter();
+
 var app = builder.Build();
 
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
-
 app.UseHttpsRedirection();
+
+app.MapCarter();
 
 app.Run();
