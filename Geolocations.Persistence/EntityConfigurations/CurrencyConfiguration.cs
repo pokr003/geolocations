@@ -1,4 +1,5 @@
 using Geolocations.Domain.Entities;
+using Geolocations.Persistence.Seeds;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -16,5 +17,7 @@ public sealed class CurrencyConfiguration : IEntityTypeConfiguration<Currency>
         builder.Property(c => c.Symbol).HasColumnType("varchar").HasMaxLength(5);
         builder.HasIndex(c => c.ISOCode).IsUnique();
         builder.HasIndex(c => c.ISONumber).IsUnique();
+        // Seed the basic currencies
+        builder.HasData(CurrencySeeder.GetData());
     }
 }
